@@ -66,7 +66,7 @@ VALUES (1, 1, 2);
 SELECT todos.*, shared_todos.shared_with_id
 FROM todos
 LEFT JOIN shared_todos ON todos.id = shared_todos.todo_id
--- Hasta aquí estamos haciendo una tabla que contenga de forma ordenada en donde los todos coincidan con el shared_todos.todo_id, es decir que coincidan los todos del mismo usuario
+-- Hasta aquí estamos haciendo una tabla que contenga de forma ordenada en donde los todos coincidan con el shared_todos.todo_id, es decir que coincidan los todos del mismo usuario, todos.* es un comodin para obtener todas las columnas de todos y así con el LEFT JOIN indicamos la relación que habrá, en donde relacionamos todos.id con shared_todos.todo_id
 WHERE todos.user_id = [user_id] OR shared_todos.shared_with_id = [user_id];
 -- Aquí filtramos los resultados para mostrar a los que han compartido o con los que se han compartido
 

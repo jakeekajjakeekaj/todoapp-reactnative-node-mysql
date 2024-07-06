@@ -48,3 +48,5 @@
 
 // -------------------------------
 
+// Para conectar a la base de datos, nos diirigimos a database.js y dentro importamos mysql, dotenv (variables de entorno) y continuamos con el código
+// Una vez finalizado el código de database.js se creará un nuevo archivo dentro de 'server' llamado .env, dentro del mismo se meterán las bariables de database.js
