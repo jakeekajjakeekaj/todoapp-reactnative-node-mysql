@@ -11,6 +11,7 @@ const pool = mysql
     user : process.env.MYSQL_USER,
     password : process.env.MYSQL_PASSWORD,
     database : process.env.MYSQL_DATABASE,
+    // port : process.env.MYSQL_PORT,
   })
   .promise();
   // promise facilita el uso de async/await para el uso de funciones asíncronas y así nos olvidamos del callback

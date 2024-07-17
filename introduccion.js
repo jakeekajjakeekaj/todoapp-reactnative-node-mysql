@@ -49,4 +49,25 @@
 // -------------------------------
 
 // Para conectar a la base de datos, nos diirigimos a database.js y dentro importamos mysql, dotenv (variables de entorno) y continuamos con el código
-// Una vez finalizado el código de database.js se creará un nuevo archivo dentro de 'server' llamado .env, dentro del mismo se meterán las bariables de database.js
+// Una vez finalizado el código de database.js se creará un nuevo archivo dentro de 'server' llamado .env, dentro del mismo se meterán las variables de database.js
+
+// Una vez finalizado lo que sería el app.js hemos terminado de crear nuestra API para así poder ser utilizada del lado front, nosotros de hecho al escribir en la barra de búsqueda las direcciones correspondientes efectivamente ya podemos visualizar la información, así mismo usamos CORS PARA LIMITAR EL ACCESO A NUESTRA API Y ASÍ MEJORAR NUESTRA SEGURIDAD
+
+// -- FRONTEND --
+
+// -- HASTA AQUÍ YA PODEMOS EMPEZAR AHORA DEL LADO DEL FRONT, por lo que podemos cerrar todo y ahora abrir la carpeta client --
+
+// En la consola escribimos la ruta de client y escribimos lo siguiente "npx create-expo-app ." de esta manera creamos un proyecto expo
+
+// EXPO ES UN CONJUNTO DE HERRAMIENTAS Y SERVICIOS DISEÑADOS PARA FACILITAR LA CREACIÓN DE APLICACIONES CON REACT NATIVE, ESTE FACILITA EL TRABAJO DE LA CREACIÓN DE APLICACIONES Y ES IDEAL PARA PROTOTIPOS, APLICACIONES PEQUEÑAS O MEDIANAS; OTRA GRAN OPCIÓN SERÍA REACT NATIVE CLI, SIN EMBARGO ESTA OPCIÓN ES MÁS COMPLEJA, SE NECESITA MÁS CONOCIMIENTO PARA EL DESARROLLO DE APLICACIONES Y ES IDEAL PARA APLICACIONES MEDIANAS Y GRANDES.
+
+// Una vez se acabe de instalar la aplicacion expo, ejecutamos "npx expo start"
+
+// Ahora podemos visualizar esto de diferentes maneras, en el navegador como nos lo indica desde consola, en Android o iOS desde la propia app desde nuestros propios dispositivos, o desde emuladores que es como accederemos nosotros.
+// En nuestro caso accederemos desde Android Studio, por lo que después de descargar Android Studio, seleccionamos "more actions" y después "cirtual device manager", una vez dentro del menú podemos visualizar la máquina virtual que tenemos por defecto instalada, para activarlo le damos al símbolo de play y así ya tenemos el emulador abierto, una vez realizado esto, desde la consola escribimos a, para así poder ejecutar expo en nuestro emulador
+
+// Si te da problemas como a mi de que no carga en el eulador pero si en la web, podemos pasar el ejemplo con "npm run reset-project" de esta manera como lo indica en el readme nos pasa el ejemplo a la carpeta de proyecto de ejemplo, y al ejecutar "npx expo start -c" ejecutamos expo pero eliminando la caché, a su vez hay que cerrar android studio antes de ejecutar este último comando, y de esta manera ya funciona
+
+// ** PARA ESTE CASO LLEGAMOS A TENER UN ERROR ** Lo que pasa es que de la nada nuestro MYSQL se llega a buggear y no permite la conexión de nuestro back con nuestra DB de MYSQL, e incluso al abrir nuestro MYSQL client y meter la contraseña, este de la nada se cierra, la manera de corregirlo es entrar a la terminal, y usar la siguiente direccion: C:\Program Files\MySQL\MySQL Server 8.0\bin, una vez esto podemos ejecutar mysql -u root para entrar en el entorno de desarrollo, este no funcionará pero nos arrojará un error, el cuál sería: ERROR 2003 (HY000): Can't connect to MySQL server on 'localhost:3306' (10061); no pasa nada, lo que se tiene que hacer es primero entrar a las variables del entorno del sistema y agregar en el patch la dirección hasta el bin, posterior a esto entrarmos a 'services' igual del propio windows y buscamos el que diga MYSQL80 y lo ejecutamos de forma manual, y listo, ya debería de estar funcionando.
+
+// Ya que por fin hemos corregido todos los bugs y ya pudimos conectar nuestra API con nuestro Front, es momento de ya poder visualizar con el formato esperado nuestras todos, es decir visualizar en la pantalla a la izquierda todo con el formato esperado, ahora lo que se hará es crear una nueva carpeta dentro de client llamada components (Para este caso ya está creada con este proyecto), creamos Task.jsx
