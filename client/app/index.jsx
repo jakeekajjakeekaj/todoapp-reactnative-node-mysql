@@ -1,6 +1,8 @@
 import { StyleSheet, FlatList, SafeAreaView, Text, View } from "react-native";
 import { useEffect, useState } from "react";
 import Task from "../components/Task";
+import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
+import InputTask from "../components/InputTask";
 
 export default function Index() {
 
@@ -17,7 +19,7 @@ export default function Index() {
     // setTodos(data);
 
     try {
-      const response = await fetch("http://192.168.1.75:8080/todos/1");
+      const response = await fetch("http://localhost:8080/todos/1");
       if (!response.ok) {
         throw new Error('Network response was not ok ' + response.statusText);
       }
@@ -44,15 +46,16 @@ export default function Index() {
   }
 
   return (
-    <View
-      // style={{
-      //   flex: 1,
-      //   justifyContent: "center",
-      //   alignItems: "center",
-      // }}
-      style={styles.container}
-      >
-      <SafeAreaView>
+    <BottomSheetModalProvider>
+      {/*<View*/}
+        {/*// style={
+        //   flex: 1,
+        //   justifyContent: "center",
+        //   alignItems: "center",
+        // }
+        style={styles.container}
+        >*/}
+      <SafeAreaView style={styles.container}>
         <FlatList 
           data={todos}
           keyExtractor={(todo)=> todo.id}
@@ -61,11 +64,14 @@ export default function Index() {
           ListHeaderComponent={()=> <Text style={styles.title}>Today</Text>}
           contentContainerStyle={styles.contentContainerStyle}
         />
+
+        <InputTask todos={todos} setTodos={setTodos} />
       </SafeAreaView>
-      {/* Lo que es 'null, 2' únicamente es para darle más formato a JSON en string y que sea más legible */}
-      {/* <Text>{ JSON.stringify(todos, null, 2) }</Text> */}
-      {/* <Text>{ "Hola" }</Text> */}
-    </View>
+        {/* Lo que es 'null, 2' únicamente es para darle más formato a JSON en string y que sea más legible */}
+        {/* <Text>{ JSON.stringify(todos, null, 2) }</Text> */}
+        {/* <Text>{ "Hola" }</Text> */}
+      {/*</View>*/}
+    </BottomSheetModalProvider>
   );
 }
 

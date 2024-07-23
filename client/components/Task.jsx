@@ -1,10 +1,23 @@
 import * as React from "react";
-import { TouchableOpacity, StyleSheet, View, Text, Pressable } from "react-native";
+import { useRef, useState } from "react";
+import { 
+          TouchableOpacity,
+          StyleSheet,
+          View,
+          Text,
+          Pressable
+        } from "react-native";
 import { Feather } from "@expo/vector-icons";
+import { BottomSheetModal } from "@gorhom/bottom-sheet";
+import SharedTodoModalContent from "./SharedTodoModalContent";
+import TodoModalContent from "./TodoModalContent";
 
 function CheckMark({ id, completed, toggleTodo }) {
   async function toggle() {
     const response = await fetch(`http://localhost:8080/todos/${id}`, {
+      headers: {
+        "Content-Type" : "application/json",
+      },
       method: "PUT",
       body: JSON.stringify({
         value: completed ? false : true,
@@ -31,6 +44,19 @@ export default function Task ({
   toggleTodo,
 }) {
   const [isDeleteActive, setIsDeleteActive] = React.useState(false);
+  const bottomSheetModalRef = React.useRef(null);
+  const sharedBottomSheetRef = React.useRef(null);
+  const snapPoints = ["25%", "48%", "75%"];
+  const snapPointsShared = ["40%"];
+
+  function handlePresentModal() {
+    bottomSheetModalRef.current?.present();
+  }
+
+  function handlePresentShared() {
+    sharedBottomSheetRef.current?.present();
+  }
+
   async function deleteTodo() {
     const response = await fetch(`http://localhost:8080/todos/${id}`, {
       method: "DELETE",
@@ -57,14 +83,14 @@ export default function Task ({
       </View>
       {shared_with_id !== null ? (
         <Feather 
-          // onPress={handlePresentShared}
+          onPress={handlePresentShared}
           name="users"
           size={20}
           color="#383839"
         />
       ) : (
         <Feather
-          // onPress={handlePresentModal}
+          onPress={handlePresentModal}
           name="share"
           size={20}
           color="#383839"
@@ -75,6 +101,27 @@ export default function Task ({
           <Text style={{ color: "fff", fontWeight: "bold" }}>x</Text>
         </Pressable>
       )}
+
+      <BottomSheetModal
+        ref={sharedBottomSheetRef}
+        snapPoints={snapPointsShared}
+        backgroundStyle={{ borderRadius: 50, borderWidth: 4 }}
+      >
+        <SharedTodoModalContent 
+          id = { id }
+          title = { title }
+          shared_with_id = { shared_with_id }
+          completed = { completed }
+        />
+      </BottomSheetModal>
+      <BottomSheetModal
+        ref= { bottomSheetModalRef }
+        index= { 2 }
+        snapPoints= { snapPoints }
+        backgroundStyle= {{ borderRadius: 50, borderWidth: 4 }}
+      >
+        <TodoModalContent id = { id } title = { title } />
+      </BottomSheetModal>
     </TouchableOpacity>
   );
 }

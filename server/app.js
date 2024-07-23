@@ -23,7 +23,7 @@ const corsOptions = {
   //     callback(new Error('Not allowed by CORS'));
   //   }
   // },
-  methods : ["GET", "PUT"],  // Especifica los mpetodos permitidos
+  methods : ["GET", "POST", "PUT", "DELETE"],  // Especifica los mpetodos permitidos
   credentials : true, // Permite enviar credenciales (cookies, autenticaciones)
 };
 const app = express();
@@ -45,12 +45,13 @@ app.get("/todos/shared_todos/:id", async(req, res)=> {
   // const { id } = req.params;
   // const { user_id } = todo;
   // const { shared_with_id } = todo;
-  const { user_id, shared_with_id } = req.params.id;
+  const { id } = req.params;
 
-  // const todo = await getSharedTodoByID(id);
-  const author = await getUserByID(user_id);
-  const shared_with = await getUserByID(shared_with_id);
+  const todo = await getSharedTodoByID(id);
+  const author = await getUserByID(todo.user_id);
+  const shared_with = await getUserByID(todo.shared_with_id);
 
+  console.log("juas juas");
   res.status(200).send({ author, shared_with });
 });
 

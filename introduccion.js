@@ -71,3 +71,15 @@
 // ** PARA ESTE CASO LLEGAMOS A TENER UN ERROR ** Lo que pasa es que de la nada nuestro MYSQL se llega a buggear y no permite la conexión de nuestro back con nuestra DB de MYSQL, e incluso al abrir nuestro MYSQL client y meter la contraseña, este de la nada se cierra, la manera de corregirlo es entrar a la terminal, y usar la siguiente direccion: C:\Program Files\MySQL\MySQL Server 8.0\bin, una vez esto podemos ejecutar mysql -u root para entrar en el entorno de desarrollo, este no funcionará pero nos arrojará un error, el cuál sería: ERROR 2003 (HY000): Can't connect to MySQL server on 'localhost:3306' (10061); no pasa nada, lo que se tiene que hacer es primero entrar a las variables del entorno del sistema y agregar en el patch la dirección hasta el bin, posterior a esto entrarmos a 'services' igual del propio windows y buscamos el que diga MYSQL80 y lo ejecutamos de forma manual, y listo, ya debería de estar funcionando.
 
 // Ya que por fin hemos corregido todos los bugs y ya pudimos conectar nuestra API con nuestro Front, es momento de ya poder visualizar con el formato esperado nuestras todos, es decir visualizar en la pantalla a la izquierda todo con el formato esperado, ahora lo que se hará es crear una nueva carpeta dentro de client llamada components (Para este caso ya está creada con este proyecto), creamos Task.jsx
+
+// LLegados al punto en donde del lado del cliente ya odemos seleccionar, quitar la selección y marcar las casillas, viene ahora que al momento de hacer clic sobre los íconos nos aparezca nuestra interfaz para compartir y eso, dicho esto tenemos que instalar dependencias aparte del lado del cliente, estas serían: npm i @gorhom/bottom-sheet y una vez instalado, para trabajar con expo se tienen que instalar otras dependencias las cuales serían: npx expo install react-native-reanimated react-native-gesture-handler
+// Una vez finalizado esto, dentro de nuestro babel.config.js, agregamos un plugin abajo de presets, el cual quedaría: 
+// plugins : ['react-native-reanimated/plugin'],
+
+// Al cambiar el babel necesitamos reiniciar el server y ya volvemos a iniciar la aplicación del lado del cliente, ahora si solo agregamos las librerías a nuestro Task y a nuestro index y listo: 
+// para Task
+// import { BottomSheetModal } from "@gorhom/bottom-sheet";
+// para index
+// import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
+
+// Hasta ahorita, después de ya haber creado el TodoModalContent, si nosotros actualizamos el estado de algún todo desde nuestra app, el estado no será actualizado en nuestra DB, para que sea actualizado lo que se debe hacer es que en el TodoModalContent se especifican los headers, pues de igual manera tenemos que especificar esos headers en nuestro Task
